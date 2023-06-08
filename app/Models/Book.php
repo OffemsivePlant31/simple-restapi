@@ -16,6 +16,11 @@ class Book extends Model
         'year',
         'rating',
         'price',
+        'date_added',
+    ];
+
+    protected $casts = [
+        'date_added' => 'date:d.m.Y',
     ];
 
     public function author(): BelongsTo

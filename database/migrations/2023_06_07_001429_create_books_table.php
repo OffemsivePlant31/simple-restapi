@@ -23,6 +23,7 @@ return new class extends Migration
             $table->year('year');
             $table->float('rating');
             $table->integer('price');
+            $table->date('date_added');
         });
     }
 

@@ -17,11 +17,12 @@ class BookFactory extends Factory
     public function definition(): array
     {
         return [
-            'title' => fake()->sentence(),
+            'title' => fake()->catchPhrase(),
             'description' => fake()->realText(),
             'year' => fake()->year(),
             'rating' => fake()->randomFloat(2, 0, 5),
             'price' => fake()->numberBetween(100, 2000),
+            'date_added' => fake()->dateTimeBetween('-1 year'),
         ];
     }
 }

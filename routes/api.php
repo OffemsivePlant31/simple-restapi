@@ -1,30 +1,12 @@
 <?php
 
-use App\Http\Resources\BookResource;
-use App\Models\Book;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
+use App\Http\Controllers\BookController;
+use App\Http\Controllers\GenreController;
+use App\Http\Controllers\LoginController;
 use Illuminate\Support\Facades\Route;
 
-Route::post('/login', function (Request $request) {
-    $credentials = $request->validate([
-        'email' => ['required', 'email'],
-        'password' => ['required'],
-    ]);
+Route::post('/login', LoginController::class);
 
-    if (Auth::attempt($credentials)) {
-        $token = $request->user()->createToken('api_access');
+Route::middleware('auth:sanctum')->get('/books', [BookController::class, 'index']);
 
-        return response()->json([
-            'token' => $token->plainTextToken,
-        ]);
-    }
-});
-
-Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-    return $request->user();
-});
-
-Route::middleware('auth:sanctum')->get('/books', function (Request $request) {
-    return BookResource::collection(Book::paginate(10));
-});
+Route::middleware('auth:sanctum')->get('/books/genres', [GenreController::class, 'index']);

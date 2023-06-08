@@ -21,8 +21,9 @@ class BookResource extends JsonResource
             'genre' => $this->genre->name,
             'author' => $this->author->name,
             'year' => $this->year,
-            'rating' => $this->rating,
-            'price' => $this->price,
+            'rating' => number_format($this->rating, 2, ','),
+            'price' => number_format($this->price, 2, ',', '&nbsp;'),
+            'dateAdded' => $this->date_added->format('d.m.Y'),
         ];
     }
 }

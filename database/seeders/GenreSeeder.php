@@ -19,7 +19,7 @@ class GenreSeeder extends Seeder
         ];
         foreach ($genres as $genre) {
             Genre::factory()->create([
-                'name' => __('genres.'.$genre, locale:'ru'),
+                'name' => __('genres.'.$genre, locale: 'ru'),
             ]);
         }
     }
