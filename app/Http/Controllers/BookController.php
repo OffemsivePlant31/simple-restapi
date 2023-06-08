@@ -8,6 +8,8 @@ use Illuminate\Http\Request;
 
 class BookController extends Controller
 {
+    private const DEFAULT_PAGE_SIZE = 5;
+
     public function __construct(private BookService $bookService)
     {
     }
@@ -15,16 +17,22 @@ class BookController extends Controller
     public function index(Request $request)
     {
         $request->validate([
-            'title' => 'string',
+            'title' => 'nullable|string',
+            'author' => 'nullable|string',
             'genre' => 'nullable|exists:genres,id',
-            'dateFrom' => 'date',
-            'dateTo' => 'date',
-            'sort' => 'string',
+            'dateFrom' => 'nullable|date',
+            'dateTo' => 'nullable|date',
+            'sort' => 'nullable|string',
+            'pageSize' => 'nullable|int|min:5|max:15',
         ]);
 
         $books = $this->bookService
             ->query(array_filter($request->query()));
 
-        return BookResource::collection($books->paginate(5));
+        return BookResource::collection(
+            $books->paginate(
+                $request->query('pageSize', self::DEFAULT_PAGE_SIZE)
+            )
+        );
     }
 }

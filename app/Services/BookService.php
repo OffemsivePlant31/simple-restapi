@@ -41,6 +41,7 @@ class BookService
             }
             match ($key) {
                 'genre' => $this->belongsToGenre($value),
+                'author' => $this->belongsToAuthor($value),
                 'sort' => $this->sort($value),
                 default => ''
             };
@@ -49,10 +50,17 @@ class BookService
         return $this->books;
     }
 
-    private function belongsToGenre($genre)
+    private function belongsToGenre(int|string $genre)
     {
         $genre = Str::contains($genre, ',') ? Str::of($genre)->explode(',') : $genre;
         $this->books = $this->books->whereBelongsTo(Genre::find($genre));
+    }
+
+    private function belongsToAuthor(string $author)
+    {
+        $this->books = $this->books->whereHas('author', function (Builder $query) use ($author) {
+            $query->where('name', 'like', "%$author%");
+        });
     }
 
     private function where($value, $column, $operation)
