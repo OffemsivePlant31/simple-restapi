@@ -1,0 +1,43 @@
+version: '3'
+services:
+  app:
+    build:
+      context: ./docker
+      dockerfile: php.Dockerfile
+    restart: unless-stopped
+    tty: true
+    environment:
+      SERVICE_NAME: app
+    working_dir: /var/www
+
+  webserver:
+    build:
+      context: ./docker
+      dockerfile: nginx.Dockerfile
+    restart: unless-stopped
+    tty: true
+    ports:
+      - "80"
+    volumes:
+      - ./docker/config/nginx/conf.d/:/etc/nginx/conf.d/
+
+  webserver-frontend:
+    build:
+      context: ./docker
+      dockerfile: nginx-frontend.Dockerfile
+    restart: unless-stopped
+    tty: true
+    ports:
+      - "80"
+
+  mysql:
+    image: 'mysql/mysql-server:8.0'
+    ports:
+        - '3306'
+    environment:
+        MYSQL_ROOT_PASSWORD: '${DB_PASSWORD}'
+        MYSQL_ROOT_HOST: '%'
+        MYSQL_DATABASE: '${DB_DATABASE}'
+        MYSQL_USER: '${DB_USERNAME}'
+        MYSQL_PASSWORD: '${DB_PASSWORD}'
+        MYSQL_ALLOW_EMPTY_PASSWORD: 1

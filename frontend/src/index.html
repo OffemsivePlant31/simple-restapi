@@ -1,0 +1,90 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Books API</title>
+  <link rel="stylesheet" href="scss/styles.scss">
+  <script type="module" src="./js/main.js"></script>
+</head>
+
+<body>
+  <div class="container-fluid">
+    <div class="row mb-3 ">
+      <h1>Работа с API книжного магазина</h1>
+    </div>
+    <div class="row">
+      <div class="col-2">
+        <form action="">
+          <div class="col mb-3">
+            <label for="sort" class="form-label">Сортировка</label>
+            <select id="sort" class="form-select">
+              <option value="" selected>По умолчанию</option>
+              <option value="id">ID, по возрастанию</option>
+              <option value="-id">ID, по убыванию</option>
+              <option value="year">Год, по возрастанию</option>
+              <option value="-year">Год, по убыванию</option>
+              <option value="rating">Рейтинг, по возрастанию</option>
+              <option value="-rating">Рейтинг, по убыванию</option>
+              <option value="price">Цена, по возрастанию</option>
+              <option value="-price">Цена, по убыванию</option>
+              <option value="date_added">Дата добавления, по возрастанию</option>
+              <option value="-date_added">Дата добавления, по убыванию</option>
+            </select>
+          </div>
+          <div class="col mb-3">
+            <label for="title" class="form-label">Название</label>
+            <input type="text" class="form-control" id="title" placeholder="Введите текст">
+          </div>
+          <div class="col mb-3">
+            <label for="title" class="form-label">Автор</label>
+            <input type="text" class="form-control" id="author" placeholder="Введите текст">
+          </div>
+          <div class="col mb-3">
+            <label for="genre" class="form-label">Жанр (множественное)</label>
+            <select id="genre" class="form-select" multiple>
+              <option value="" selected>Выберите жанр</option>
+            </select>
+          </div>
+          <div class="col mb-3">
+            <label for="dateFrom" class="form-label">Дата добавления с</label>
+            <input type="date" class="form-control" id="dateFrom">
+          </div>
+          <div class="col mb-3">
+            <label for="dateTo" class="form-label">Дата добавления по</label>
+            <input type="date" class="form-control" id="dateTo">
+          </div>
+        </form>
+      </div>
+      <div class="col">
+        <table class="table table-dark table-striped table-bordered">
+          <thead>
+            <tr>
+              <th scope="col">ID</th>
+              <th scope="col">Название</th>
+              <th scope="col">Описание</th>
+              <th scope="col">Жанр</th>
+              <th scope="col">Автор</th>
+              <th scope="col">Год</th>
+              <th scope="col">Рейтинг</th>
+              <th scope="col">Цена</th>
+              <th scope="col">Дата добавления</th>
+            </tr>
+          </thead>
+          <tbody>
+          </tbody>
+        </table>
+        <nav>
+          <ul class="pagination">
+            <li class="page-item"><a class="page-link" href="#">1</a></li>
+            <li class="page-item"><a class="page-link" href="#">2</a></li>
+            <li class="page-item"><a class="page-link" href="#">3</a></li>
+          </ul>
+        </nav>
+      </div>
+    </div>
+  </div>
+</body>
+
+</html>
