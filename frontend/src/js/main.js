@@ -2,7 +2,7 @@ import '../scss/styles.scss'
 
 const email = 'test@example.com';
 const password = 'password';
-const baseUrl = 'webserver/api';
+const baseUrl = 'http://localhost/api';
 const paths = {
   'login': '/login',
   'books': '/books',
